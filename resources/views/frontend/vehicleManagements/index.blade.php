@@ -36,13 +36,13 @@
                                         {{ trans('cruds.vehicleManagement.fields.car_plate') }}
                                     </th>
                                     <th>
+                                        {{ trans('cruds.vehicleManagement.fields.model') }}
+                                    </th>
+                                    <th>
                                         {{ trans('cruds.vehicleManagement.fields.is_verify') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.vehicleManagement.fields.brand') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.vehicleManagement.fields.modal') }}
                                     </th>
                                     <th>
                                         {{ trans('cruds.vehicleManagement.fields.color') }}
@@ -78,6 +78,14 @@
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
+                                        <select class="search">
+                                            <option value>{{ trans('global.all') }}</option>
+                                            @foreach($vehicle_models as $key => $item)
+                                                <option value="{{ $item->model }}">{{ $item->model }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
                                     </td>
                                     <td>
                                         <select class="search">
@@ -86,9 +94,6 @@
                                                 <option value="{{ $item->brand }}">{{ $item->brand }}</option>
                                             @endforeach
                                         </select>
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -117,14 +122,14 @@
                                             {{ $vehicleManagement->car_plate ?? '' }}
                                         </td>
                                         <td>
+                                            {{ $vehicleManagement->model->model ?? '' }}
+                                        </td>
+                                        <td>
                                             <span style="display:none">{{ $vehicleManagement->is_verify ?? '' }}</span>
                                             <input type="checkbox" disabled="disabled" {{ $vehicleManagement->is_verify ? 'checked' : '' }}>
                                         </td>
                                         <td>
                                             {{ $vehicleManagement->brand->brand ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $vehicleManagement->modal ?? '' }}
                                         </td>
                                         <td>
                                             {{ $vehicleManagement->color ?? '' }}

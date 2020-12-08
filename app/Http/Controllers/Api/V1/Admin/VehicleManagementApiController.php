@@ -17,7 +17,7 @@ class VehicleManagementApiController extends Controller
     {
         abort_if(Gate::denies('vehicle_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new VehicleManagementResource(VehicleManagement::with(['username', 'brand'])->get());
+        return new VehicleManagementResource(VehicleManagement::with(['username', 'model', 'brand'])->get());
     }
 
     public function store(StoreVehicleManagementRequest $request)
@@ -33,7 +33,7 @@ class VehicleManagementApiController extends Controller
     {
         abort_if(Gate::denies('vehicle_management_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new VehicleManagementResource($vehicleManagement->load(['username', 'brand']));
+        return new VehicleManagementResource($vehicleManagement->load(['username', 'model', 'brand']));
     }
 
     public function update(UpdateVehicleManagementRequest $request, VehicleManagement $vehicleManagement)

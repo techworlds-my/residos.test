@@ -12,11 +12,10 @@ class CreateVehicleManagementsTable extends Migration
             $table->bigIncrements('id');
             $table->string('car_plate');
             $table->boolean('is_verify')->default(0)->nullable();
-            $table->string('modal')->nullable();
             $table->string('color')->nullable();
-            $table->boolean('is_season_park')->default(0);
+            $table->boolean('is_season_park')->default(0)->nullable();
             $table->integer('dirver_count')->nullable();
-            $table->boolean('is_resident')->default(0);
+            $table->boolean('is_resident')->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

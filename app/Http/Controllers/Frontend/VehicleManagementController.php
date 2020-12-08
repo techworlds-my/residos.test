@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateVehicleManagementRequest;
 use App\Models\User;
 use App\Models\VehicleBrand;
 use App\Models\VehicleManagement;
+use App\Models\VehicleModel;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +23,15 @@ class VehicleManagementController extends Controller
     {
         abort_if(Gate::denies('vehicle_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $vehicleManagements = VehicleManagement::with(['username', 'brand'])->get();
+        $vehicleManagements = VehicleManagement::with(['username', 'model', 'brand'])->get();
 
         $users = User::get();
 
+        $vehicle_models = VehicleModel::get();
+
         $vehicle_brands = VehicleBrand::get();
 
-        return view('frontend.vehicleManagements.index', compact('vehicleManagements', 'users', 'vehicle_brands'));
+        return view('frontend.vehicleManagements.index', compact('vehicleManagements', 'users', 'vehicle_models', 'vehicle_brands'));
     }
 
     public function create()
@@ -37,9 +40,11 @@ class VehicleManagementController extends Controller
 
         $usernames = User::all()->pluck('username', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $models = VehicleModel::all()->pluck('model', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $brands = VehicleBrand::all()->pluck('brand', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('frontend.vehicleManagements.create', compact('usernames', 'brands'));
+        return view('frontend.vehicleManagements.create', compact('usernames', 'models', 'brands'));
     }
 
     public function store(StoreVehicleManagementRequest $request)
@@ -55,11 +60,13 @@ class VehicleManagementController extends Controller
 
         $usernames = User::all()->pluck('username', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+        $models = VehicleModel::all()->pluck('model', 'id')->prepend(trans('global.pleaseSelect'), '');
+
         $brands = VehicleBrand::all()->pluck('brand', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $vehicleManagement->load('username', 'brand');
+        $vehicleManagement->load('username', 'model', 'brand');
 
-        return view('frontend.vehicleManagements.edit', compact('usernames', 'brands', 'vehicleManagement'));
+        return view('frontend.vehicleManagements.edit', compact('usernames', 'models', 'brands', 'vehicleManagement'));
     }
 
     public function update(UpdateVehicleManagementRequest $request, VehicleManagement $vehicleManagement)
@@ -73,7 +80,7 @@ class VehicleManagementController extends Controller
     {
         abort_if(Gate::denies('vehicle_management_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $vehicleManagement->load('username', 'brand');
+        $vehicleManagement->load('username', 'model', 'brand');
 
         return view('frontend.vehicleManagements.show', compact('vehicleManagement'));
     }

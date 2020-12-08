@@ -28,22 +28,6 @@
                                 </tr>
                                 <tr>
                                     <th>
-                                        {{ trans('cruds.vehicleModel.fields.modal') }}
-                                    </th>
-                                    <td>
-                                        {{ $vehicleModel->modal }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {{ trans('cruds.vehicleModel.fields.is_enable') }}
-                                    </th>
-                                    <td>
-                                        {{ App\Models\VehicleModel::IS_ENABLE_SELECT[$vehicleModel->is_enable] ?? '' }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
                                         {{ trans('cruds.vehicleModel.fields.brand') }}
                                     </th>
                                     <td>
