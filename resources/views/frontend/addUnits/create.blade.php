@@ -1,0 +1,72 @@
+@extends('layouts.frontend')
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-header">
+                    {{ trans('global.create') }} {{ trans('cruds.addUnit.title_singular') }}
+                </div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route("frontend.add-units.store") }}" enctype="multipart/form-data">
+                        @method('POST')
+                        @csrf
+                        <div class="form-group">
+                            <label class="required" for="unit">{{ trans('cruds.addUnit.fields.unit') }}</label>
+                            <input class="form-control" type="text" name="unit" id="unit" value="{{ old('unit', '') }}" required>
+                            @if($errors->has('unit'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('unit') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.addUnit.fields.unit_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="floor">{{ trans('cruds.addUnit.fields.floor') }}</label>
+                            <input class="form-control" type="text" name="floor" id="floor" value="{{ old('floor', '') }}" required>
+                            @if($errors->has('floor'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('floor') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.addUnit.fields.floor_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="block_id">{{ trans('cruds.addUnit.fields.block') }}</label>
+                            <select class="form-control select2" name="block_id" id="block_id" required>
+                                @foreach($blocks as $id => $block)
+                                    <option value="{{ $id }}" {{ old('block_id') == $id ? 'selected' : '' }}>{{ $block }}</option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('block'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('block') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.addUnit.fields.block_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <label class="required" for="unit_square">{{ trans('cruds.addUnit.fields.unit_square') }}</label>
+                            <input class="form-control" type="number" name="unit_square" id="unit_square" value="{{ old('unit_square', '') }}" step="0.01" required>
+                            @if($errors->has('unit_square'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('unit_square') }}
+                                </div>
+                            @endif
+                            <span class="help-block">{{ trans('cruds.addUnit.fields.unit_square_helper') }}</span>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-danger" type="submit">
+                                {{ trans('global.save') }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@endsection
