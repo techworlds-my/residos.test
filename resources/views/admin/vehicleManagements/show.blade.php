@@ -41,6 +41,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.vehicleManagement.fields.model') }}
+                        </th>
+                        <td>
+                            {{ $vehicleManagement->model->model ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.vehicleManagement.fields.is_verify') }}
                         </th>
                         <td>
@@ -53,14 +61,6 @@
                         </th>
                         <td>
                             {{ $vehicleManagement->brand->brand ?? '' }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.vehicleManagement.fields.modal') }}
-                        </th>
-                        <td>
-                            {{ $vehicleManagement->modal }}
                         </td>
                     </tr>
                     <tr>

@@ -30,12 +30,6 @@
                                         {{ trans('cruds.vehicleModel.fields.id') }}
                                     </th>
                                     <th>
-                                        {{ trans('cruds.vehicleModel.fields.modal') }}
-                                    </th>
-                                    <th>
-                                        {{ trans('cruds.vehicleModel.fields.is_enable') }}
-                                    </th>
-                                    <th>
                                         {{ trans('cruds.vehicleModel.fields.brand') }}
                                     </th>
                                     <th>
@@ -53,17 +47,6 @@
                                     </td>
                                     <td>
                                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                                    </td>
-                                    <td>
-                                        <select class="search" strict="true">
-                                            <option value>{{ trans('global.all') }}</option>
-                                            @foreach(App\Models\VehicleModel::IS_ENABLE_SELECT as $key => $item)
-                                                <option value="{{ $item }}">{{ $item }}</option>
-                                            @endforeach
-                                        </select>
                                     </td>
                                     <td>
                                         <select class="search">
@@ -87,12 +70,6 @@
                                     <tr data-entry-id="{{ $vehicleModel->id }}">
                                         <td>
                                             {{ $vehicleModel->id ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ $vehicleModel->modal ?? '' }}
-                                        </td>
-                                        <td>
-                                            {{ App\Models\VehicleModel::IS_ENABLE_SELECT[$vehicleModel->is_enable] ?? '' }}
                                         </td>
                                         <td>
                                             {{ $vehicleModel->brand->brand ?? '' }}

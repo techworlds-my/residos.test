@@ -9,7 +9,7 @@ class AddRelationshipFieldsToVehicleModelsTable extends Migration
     public function up()
     {
         Schema::table('vehicle_models', function (Blueprint $table) {
-            $table->unsignedBigInteger('brand_id')->nullable();
+            $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id', 'brand_fk_2751568')->references('id')->on('vehicle_brands');
         });
     }

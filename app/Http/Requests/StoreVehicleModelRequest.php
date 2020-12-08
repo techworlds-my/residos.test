@@ -17,18 +17,12 @@ class StoreVehicleModelRequest extends FormRequest
     public function rules()
     {
         return [
-            'modal'     => [
+            'brand_id' => [
+                'required',
+                'integer',
+            ],
+            'model'    => [
                 'string',
-                'required',
-            ],
-            'is_enable' => [
-                'required',
-            ],
-            'model'     => [
-                'string',
-                'required',
-            ],
-            'is_enable' => [
                 'required',
             ],
         ];

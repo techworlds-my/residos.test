@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateVehicleManagementRequest;
 use App\Models\User;
 use App\Models\VehicleBrand;
 use App\Models\VehicleManagement;
+use App\Models\VehicleModel;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class VehicleManagementController extends Controller
         abort_if(Gate::denies('vehicle_management_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         if ($request->ajax()) {
-            $query = VehicleManagement::with(['username', 'brand'])->select(sprintf('%s.*', (new VehicleManagement)->table));
+            $query = VehicleManagement::with(['username', 'brand', 'model'])->select(sprintf('%s.*', (new VehicleManagement)->table));
             $table = Datatables::of($query);
 
             $table->addColumn('placeholder', '&nbsp;');
@@ -62,9 +63,6 @@ class VehicleManagementController extends Controller
                 return $row->brand ? $row->brand->brand : '';
             });
 
-            $table->editColumn('modal', function ($row) {
-                return $row->modal ? $row->modal : "";
-            });
             $table->editColumn('color', function ($row) {
                 return $row->color ? $row->color : "";
             });
@@ -77,16 +75,20 @@ class VehicleManagementController extends Controller
             $table->editColumn('is_resident', function ($row) {
                 return '<input type="checkbox" disabled ' . ($row->is_resident ? 'checked' : null) . '>';
             });
+            $table->addColumn('model_model', function ($row) {
+                return $row->model ? $row->model->model : '';
+            });
 
-            $table->rawColumns(['actions', 'placeholder', 'username', 'is_verify', 'brand', 'is_season_park', 'is_resident']);
+            $table->rawColumns(['actions', 'placeholder', 'username', 'is_verify', 'brand', 'is_season_park', 'is_resident', 'model']);
 
             return $table->make(true);
         }
 
         $users          = User::get();
         $vehicle_brands = VehicleBrand::get();
+        $vehicle_models = VehicleModel::get();
 
-        return view('admin.vehicleManagements.index', compact('users', 'vehicle_brands'));
+        return view('admin.vehicleManagements.index', compact('users', 'vehicle_brands', 'vehicle_models'));
     }
 
     public function create()
@@ -97,7 +99,9 @@ class VehicleManagementController extends Controller
 
         $brands = VehicleBrand::all()->pluck('brand', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.vehicleManagements.create', compact('usernames', 'brands'));
+        $models = VehicleModel::all()->pluck('model', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.vehicleManagements.create', compact('usernames', 'brands', 'models'));
     }
 
     public function store(StoreVehicleManagementRequest $request)
@@ -115,9 +119,11 @@ class VehicleManagementController extends Controller
 
         $brands = VehicleBrand::all()->pluck('brand', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $vehicleManagement->load('username', 'brand');
+        $models = VehicleModel::all()->pluck('model', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.vehicleManagements.edit', compact('usernames', 'brands', 'vehicleManagement'));
+        $vehicleManagement->load('username', 'brand', 'model');
+
+        return view('admin.vehicleManagements.edit', compact('usernames', 'brands', 'models', 'vehicleManagement'));
     }
 
     public function update(UpdateVehicleManagementRequest $request, VehicleManagement $vehicleManagement)
@@ -131,7 +137,7 @@ class VehicleManagementController extends Controller
     {
         abort_if(Gate::denies('vehicle_management_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $vehicleManagement->load('username', 'brand');
+        $vehicleManagement->load('username', 'brand', 'model');
 
         return view('admin.vehicleManagements.show', compact('vehicleManagement'));
     }

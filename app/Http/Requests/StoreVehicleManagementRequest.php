@@ -17,33 +17,31 @@ class StoreVehicleManagementRequest extends FormRequest
     public function rules()
     {
         return [
-            'username_id'    => [
+            'username_id'  => [
                 'required',
                 'integer',
             ],
-            'car_plate'      => [
+            'car_plate'    => [
                 'string',
                 'required',
             ],
-            'modal'          => [
-                'string',
-                'nullable',
-            ],
-            'color'          => [
-                'string',
-                'nullable',
-            ],
-            'is_season_park' => [
+            'model_id'     => [
                 'required',
+                'integer',
             ],
-            'dirver_count'   => [
+            'brand_id'     => [
+                'required',
+                'integer',
+            ],
+            'color'        => [
+                'string',
+                'nullable',
+            ],
+            'dirver_count' => [
                 'nullable',
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
-            ],
-            'is_resident'    => [
-                'required',
             ],
         ];
     }

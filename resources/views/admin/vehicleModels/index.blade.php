@@ -29,12 +29,6 @@
                         {{ trans('cruds.vehicleModel.fields.id') }}
                     </th>
                     <th>
-                        {{ trans('cruds.vehicleModel.fields.modal') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.vehicleModel.fields.is_enable') }}
-                    </th>
-                    <th>
                         {{ trans('cruds.vehicleModel.fields.brand') }}
                     </th>
                     <th>
@@ -52,17 +46,6 @@
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
-                    </td>
-                    <td>
-                        <select class="search" strict="true">
-                            <option value>{{ trans('global.all') }}</option>
-                            @foreach(App\Models\VehicleModel::IS_ENABLE_SELECT as $key => $item)
-                                <option value="{{ $key }}">{{ $item }}</option>
-                            @endforeach
-                        </select>
                     </td>
                     <td>
                         <select class="search">
@@ -133,8 +116,6 @@
     columns: [
       { data: 'placeholder', name: 'placeholder' },
 { data: 'id', name: 'id' },
-{ data: 'modal', name: 'modal' },
-{ data: 'is_enable', name: 'is_enable' },
 { data: 'brand_brand', name: 'brand.brand' },
 { data: 'model', name: 'model' },
 { data: 'is_enable', name: 'is_enable' },

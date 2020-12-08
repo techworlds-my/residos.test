@@ -34,6 +34,20 @@
                 <span class="help-block">{{ trans('cruds.vehicleManagement.fields.car_plate_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="model_id">{{ trans('cruds.vehicleManagement.fields.model') }}</label>
+                <select class="form-control select2 {{ $errors->has('model') ? 'is-invalid' : '' }}" name="model_id" id="model_id" required>
+                    @foreach($models as $id => $model)
+                        <option value="{{ $id }}" {{ old('model_id') == $id ? 'selected' : '' }}>{{ $model }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('model'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('model') }}
+                    </div>
+                @endif
+                <span class="help-block">{{ trans('cruds.vehicleManagement.fields.model_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <div class="form-check {{ $errors->has('is_verify') ? 'is-invalid' : '' }}">
                     <input type="hidden" name="is_verify" value="0">
                     <input class="form-check-input" type="checkbox" name="is_verify" id="is_verify" value="1" {{ old('is_verify', 0) == 1 ? 'checked' : '' }}>
@@ -47,8 +61,8 @@
                 <span class="help-block">{{ trans('cruds.vehicleManagement.fields.is_verify_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="brand_id">{{ trans('cruds.vehicleManagement.fields.brand') }}</label>
-                <select class="form-control select2 {{ $errors->has('brand') ? 'is-invalid' : '' }}" name="brand_id" id="brand_id">
+                <label class="required" for="brand_id">{{ trans('cruds.vehicleManagement.fields.brand') }}</label>
+                <select class="form-control select2 {{ $errors->has('brand') ? 'is-invalid' : '' }}" name="brand_id" id="brand_id" required>
                     @foreach($brands as $id => $brand)
                         <option value="{{ $id }}" {{ old('brand_id') == $id ? 'selected' : '' }}>{{ $brand }}</option>
                     @endforeach
@@ -59,16 +73,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.vehicleManagement.fields.brand_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="modal">{{ trans('cruds.vehicleManagement.fields.modal') }}</label>
-                <input class="form-control {{ $errors->has('modal') ? 'is-invalid' : '' }}" type="text" name="modal" id="modal" value="{{ old('modal', '') }}">
-                @if($errors->has('modal'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('modal') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.vehicleManagement.fields.modal_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="color">{{ trans('cruds.vehicleManagement.fields.color') }}</label>
@@ -82,8 +86,9 @@
             </div>
             <div class="form-group">
                 <div class="form-check {{ $errors->has('is_season_park') ? 'is-invalid' : '' }}">
-                    <input class="form-check-input" type="checkbox" name="is_season_park" id="is_season_park" value="1" required {{ old('is_season_park', 0) == 1 ? 'checked' : '' }}>
-                    <label class="required form-check-label" for="is_season_park">{{ trans('cruds.vehicleManagement.fields.is_season_park') }}</label>
+                    <input type="hidden" name="is_season_park" value="0">
+                    <input class="form-check-input" type="checkbox" name="is_season_park" id="is_season_park" value="1" {{ old('is_season_park', 0) == 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="is_season_park">{{ trans('cruds.vehicleManagement.fields.is_season_park') }}</label>
                 </div>
                 @if($errors->has('is_season_park'))
                     <div class="invalid-feedback">
@@ -104,8 +109,9 @@
             </div>
             <div class="form-group">
                 <div class="form-check {{ $errors->has('is_resident') ? 'is-invalid' : '' }}">
-                    <input class="form-check-input" type="checkbox" name="is_resident" id="is_resident" value="1" required {{ old('is_resident', 0) == 1 ? 'checked' : '' }}>
-                    <label class="required form-check-label" for="is_resident">{{ trans('cruds.vehicleManagement.fields.is_resident') }}</label>
+                    <input type="hidden" name="is_resident" value="0">
+                    <input class="form-check-input" type="checkbox" name="is_resident" id="is_resident" value="1" {{ old('is_resident', 0) == 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="is_resident">{{ trans('cruds.vehicleManagement.fields.is_resident') }}</label>
                 </div>
                 @if($errors->has('is_resident'))
                     <div class="invalid-feedback">

@@ -47,12 +47,6 @@ class VehicleModelController extends Controller
             $table->editColumn('id', function ($row) {
                 return $row->id ? $row->id : "";
             });
-            $table->editColumn('modal', function ($row) {
-                return $row->modal ? $row->modal : "";
-            });
-            $table->editColumn('is_enable', function ($row) {
-                return $row->is_enable ? VehicleModel::IS_ENABLE_SELECT[$row->is_enable] : '';
-            });
             $table->addColumn('brand_brand', function ($row) {
                 return $row->brand ? $row->brand->brand : '';
             });

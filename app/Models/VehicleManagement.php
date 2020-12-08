@@ -23,9 +23,9 @@ class VehicleManagement extends Model
     protected $fillable = [
         'username_id',
         'car_plate',
+        'model_id',
         'is_verify',
         'brand_id',
-        'modal',
         'color',
         'is_season_park',
         'dirver_count',
@@ -43,6 +43,11 @@ class VehicleManagement extends Model
     public function username()
     {
         return $this->belongsTo(User::class, 'username_id');
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(VehicleModel::class, 'model_id');
     }
 
     public function brand()

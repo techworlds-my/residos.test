@@ -12,10 +12,6 @@ class VehicleModel extends Model
 {
     use SoftDeletes, Auditable, HasFactory;
 
-    const IS_ENABLE_SELECT = [
-
-    ];
-
     public $table = 'vehicle_models';
 
     protected $dates = [
@@ -25,10 +21,9 @@ class VehicleModel extends Model
     ];
 
     protected $fillable = [
-        'modal',
-        'is_enable',
         'brand_id',
         'model',
+        'is_enable',
         'created_at',
         'updated_at',
         'deleted_at',

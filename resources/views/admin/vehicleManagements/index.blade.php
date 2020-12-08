@@ -35,13 +35,13 @@
                         {{ trans('cruds.vehicleManagement.fields.car_plate') }}
                     </th>
                     <th>
+                        {{ trans('cruds.vehicleManagement.fields.model') }}
+                    </th>
+                    <th>
                         {{ trans('cruds.vehicleManagement.fields.is_verify') }}
                     </th>
                     <th>
                         {{ trans('cruds.vehicleManagement.fields.brand') }}
-                    </th>
-                    <th>
-                        {{ trans('cruds.vehicleManagement.fields.modal') }}
                     </th>
                     <th>
                         {{ trans('cruds.vehicleManagement.fields.color') }}
@@ -77,6 +77,14 @@
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
+                        <select class="search">
+                            <option value>{{ trans('global.all') }}</option>
+                            @foreach($vehicle_models as $key => $item)
+                                <option value="{{ $item->model }}">{{ $item->model }}</option>
+                            @endforeach
+                        </select>
+                    </td>
+                    <td>
                     </td>
                     <td>
                         <select class="search">
@@ -85,9 +93,6 @@
                                 <option value="{{ $item->brand }}">{{ $item->brand }}</option>
                             @endforeach
                         </select>
-                    </td>
-                    <td>
-                        <input class="search" type="text" placeholder="{{ trans('global.search') }}">
                     </td>
                     <td>
                         <input class="search" type="text" placeholder="{{ trans('global.search') }}">
@@ -157,9 +162,9 @@
 { data: 'id', name: 'id' },
 { data: 'username_username', name: 'username.username' },
 { data: 'car_plate', name: 'car_plate' },
+{ data: 'model_model', name: 'model.model' },
 { data: 'is_verify', name: 'is_verify' },
 { data: 'brand_brand', name: 'brand.brand' },
-{ data: 'modal', name: 'modal' },
 { data: 'color', name: 'color' },
 { data: 'is_season_park', name: 'is_season_park' },
 { data: 'dirver_count', name: 'dirver_count' },
